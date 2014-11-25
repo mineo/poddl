@@ -40,6 +40,9 @@ Mainloop:
 // default message handler
 func NewClient(address, user, domain, password string, config *xmpp.Config) (c *Client, err error) {
 	conn, err := xmpp.Dial(address, user, domain, password, config)
+	if err != nil {
+		return
+	}
 	c = &Client{
 		MessageHandler: handleClientMessage,
 		connection:     conn,
