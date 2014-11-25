@@ -36,7 +36,7 @@ Mainloop:
 	}
 }
 
-// NewClient creates a new Client with a connecting to an XMPP server and a
+// NewClient creates a new Client with a connection to an XMPP server and a
 // default message handler
 func NewClient(address, user, domain, password string, config *xmpp.Config) (c *Client, err error) {
 	conn, err := xmpp.Dial(address, user, domain, password, config)
