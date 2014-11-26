@@ -10,6 +10,7 @@ func main() {
 	client, err := poddl.NewClient()
 	if err != nil {
 		fmt.Println(err.Error())
+		return
 	}
 	client.Mainloop()
 }
