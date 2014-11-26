@@ -8,6 +8,7 @@ import (
 
 // Client is
 type Client struct {
+	config         *Config
 	connection     *xmpp.Conn
 	quitchan       chan (bool)
 	MessageHandler func(c *Client, m *xmpp.ClientMessage)
@@ -38,13 +39,27 @@ Mainloop:
 
 // NewClient creates a new Client with a connection to an XMPP server and a
 // default message handler
-func NewClient(address, user, domain, password string, config *xmpp.Config) (c *Client, err error) {
-	conn, err := xmpp.Dial(address, user, domain, password, config)
+func NewClient() (c *Client, err error) {
+	poddlconf, err := readConfig()
+
+	if err != nil {
+		return nil, err
+	}
+
+	conn, err := xmpp.Dial(
+		poddlconf.Address,
+		poddlconf.User,
+		poddlconf.Domain,
+		poddlconf.Password,
+		&xmpp.Config{})
+
 	if err != nil {
 		return
 	}
+
 	c = &Client{
 		MessageHandler: handleClientMessage,
+		config:         poddlconf,
 		connection:     conn,
 		quitchan:       make(chan bool, 1)}
 	return
