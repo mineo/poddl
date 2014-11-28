@@ -2,16 +2,15 @@ package poddl
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/adrg/xdg"
 	"io/ioutil"
 )
 
 type Config struct {
 	Address  string
-	User     string
 	Domain   string
 	Password string
+	User     string
 	Feeds    []string
 }
 
