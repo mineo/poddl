@@ -8,10 +8,15 @@ import (
 
 type Config struct {
 	Address  string
+	Contact  string
 	Domain   string
 	Password string
 	User     string
-	Feeds    []string
+	Feeds    []Feed
+}
+
+type Feed struct {
+	URL         string
 }
 
 const configFilename = "poddl/config.json"
